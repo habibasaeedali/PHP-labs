@@ -62,3 +62,23 @@ if (isset($_POST["btn-login"])) {
         exit;
     }
 }
+
+
+if (isset($_POST['btn-update-user'])) {
+    $id = $_POST['id'];
+    $name = trim($_POST['userName']);
+    $email = trim($_POST['userEmail']);
+    
+    $db->update("users", "id", $id, [
+        "name" => $name,
+        "email" => $email
+    ]);
+    header("location:allUsers.php?successMessage=User updated");
+}
+
+
+if (isset($_GET['delete'])) {
+    $id = $_GET['delete'];
+    $db->delete("users", "id", $id);
+    header("location:allUsers.php?successMessage=User deleted");
+}
